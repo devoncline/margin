@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -8,7 +8,18 @@ function App() {
     "Daily Participation - Wednesday"
   ]
 
-  const [completedAssignments, setCompletedAssignments] = useState([])
+  const [completedAssignments, setCompletedAssignments] = useState(() => {
+    const savedAssignments = localStorage.getItem("margin-completed-week-10")
+
+    return savedAssignments ? JSON.parse(savedAssignments) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem(
+      "margin-completed-week-10",
+      JSON.stringify(completedAssignments)
+    )
+  }, [completedAssignments])
 
   return (
     <main>
