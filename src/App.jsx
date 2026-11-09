@@ -3,8 +3,6 @@ import { assignments } from './data/assignments'
 import './App.css'
 
 function App() {
-
-
   const [completedAssignments, setCompletedAssignments] = useState(() => {
     const savedAssignments = localStorage.getItem("margin-completed-ids-week-10")
 
