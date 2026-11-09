@@ -3,20 +3,35 @@ import './App.css'
 
 function App() {
   const assignments = [
-    "React API Assignment",
-    "Daily Participation - Monday",
-    "Daily Participation - Wednesday"
+    {
+      id: "react-api-01",
+      title: "React API Assignment",
+      schoologyUrl: "",
+      repoUrl: ""
+    },
+    {
+      id: "participation-monday",
+      title: "Daily Participation - Monday",
+      schoologyUrl: "",
+      repoUrl: ""
+    },
+    {
+      id: "participation-wednesday",
+      title: "Daily Participation - Wednesday",
+      schoologyUrl: "",
+      repoUrl: ""
+    }
   ]
 
   const [completedAssignments, setCompletedAssignments] = useState(() => {
-    const savedAssignments = localStorage.getItem("margin-completed-week-10")
+    const savedAssignments = localStorage.getItem("margin-completed-ids-week-10")
 
     return savedAssignments ? JSON.parse(savedAssignments) : []
   })
 
   useEffect(() => {
     localStorage.setItem(
-      "margin-completed-week-10",
+      "margin-completed-ids-week-10",
       JSON.stringify(completedAssignments)
     )
   }, [completedAssignments])
@@ -29,24 +44,24 @@ function App() {
       <p>{completedAssignments.length} of {assignments.length} completed</p>
       <ul>
         {assignments.map((assignment) => (
-          <li key={assignment}>
+          <li key={assignment.id}>
             <input
               type="checkbox"
-              checked={completedAssignments.includes(assignment)}
+              checked={completedAssignments.includes(assignment.id)}
               onChange={() => {
-                if (completedAssignments.includes(assignment)) {
+                if (completedAssignments.includes(assignment.id)) {
                   setCompletedAssignments((previous) =>
-                    previous.filter((item) => item !== assignment)
+                    previous.filter((item) => item !== assignment.id)
                   )
                 } else {
                   setCompletedAssignments((previous) => [
                     ...previous,
-                    assignment
+                    assignment.id
                   ])
                 }
               }}
             />
-            {assignment}
+            {assignment.title}
           </li>
         ))}
       </ul>
