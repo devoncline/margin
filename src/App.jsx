@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
@@ -6,6 +7,9 @@ function App() {
     "Daily Participation - Monday",
     "Daily Participation - Wednesday"
   ]
+
+  const [completedAssignments, setCompletedAssignments] = useState([])
+
   return (
     <main>
       <h1>Week 10 Assignments</h1>
@@ -14,7 +18,11 @@ function App() {
       <ul>
         {assignments.map((assignment) => (
           <li key={assignment}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={completedAssignments.includes(assignment)}
+              onChange={() => console.log(assignment)}
+            />
             {assignment}
           </li>
         ))}
